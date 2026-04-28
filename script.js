@@ -215,6 +215,8 @@ function openModal(startTab = null) {
   modal.classList.add("active");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  siteNav?.classList.remove("open");
+  mobileMenuBtn?.setAttribute("aria-expanded", "false");
 
   if (startTab) {
     showWorkspace(startTab);
