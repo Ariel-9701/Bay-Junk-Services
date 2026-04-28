@@ -347,7 +347,7 @@ h2 { font-size: clamp(2rem, 4vw, 3.7rem); font-weight: 850; }
 .estimate-modal {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 30000;
   display: none;
   align-items: center;
   justify-content: center;
@@ -365,7 +365,7 @@ h2 { font-size: clamp(2rem, 4vw, 3.7rem); font-weight: 850; }
 
 .modal-panel {
   position: relative;
-  z-index: 2;
+  z-index: 30001;
   width: min(1120px, 96vw);
   max-height: 91vh;
   overflow: auto;
@@ -384,7 +384,7 @@ h2 { font-size: clamp(2rem, 4vw, 3.7rem); font-weight: 850; }
 .modal-close {
   position: sticky;
   top: 0;
-  z-index: 4;
+  z-index: 30002;
   display: grid;
   place-items: center;
   width: 44px;
@@ -611,3 +611,7 @@ select, input, textarea { width: 100%; border: 1px solid rgba(17, 136, 204, 0.22
     transform: translateY(0) scale(1);
   }
 }
+
+/* Modal must stay above the mobile header/menu */
+body.modal-open .site-header { display: none; }
+
