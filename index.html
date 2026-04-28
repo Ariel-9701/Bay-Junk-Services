@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bay Junk Services provides premium junk removal in Tampa Bay with fast estimates, photo quotes, and easy booking." />
+  <title>Bay Junk Services | Tampa Bay Junk Removal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-wrap liquid-glass">
+      <a class="brand" href="#" data-view-link="home" aria-label="Bay Junk Services home">
+        <img src="logo.png" alt="Bay Junk Services logo" class="logo" />
+        <div class="brand-text">
+          <span>Bay Junk Services</span>
+          <small>Tampa Bay, Florida</small>
+        </div>
+      </a>
+
+      <button class="mobile-menu-btn glass-button" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <button class="nav-link active" type="button" data-view-link="home">Home</button>
+        <button class="nav-link" type="button" data-view-link="services">Services</button>
+        <button class="nav-link" type="button" data-view-link="location">Location</button>
+        <button class="nav-link" type="button" data-view-link="company">Company</button>
+        <button class="nav-link" type="button" data-view-link="contact">Contact</button>
+        <button class="btn btn-primary nav-cta glass-button" type="button" data-open-estimate>Get Estimate</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="view active" id="home-view" data-view="home">
+      <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+          <div class="hero-copy liquid-glass hero-card">
+            <p class="eyebrow">Premium junk hauling in Tampa Bay</p>
+            <h1>Clear your space without wasting your day.</h1>
+            <p class="hero-subtitle">
+              Fast local junk removal for homes, businesses, cleanouts, debris, furniture, and more.
+            </p>
+            <p class="trust-line">✔ Licensed & Insured • ✔ Same-Day Service • ✔ Upfront Pricing</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-large glass-button" type="button" data-open-estimate data-start-tab="items">Get Estimate</button>
+              <button class="btn btn-secondary btn-large glass-button" type="button" data-open-estimate data-start-tab="photo">Send Details</button>
+            </div>
+          </div>
+
+          <aside class="hero-logo-panel liquid-glass">
+            <img src="logo.png" alt="Bay Junk Services logo" />
+            <div>
+              <strong>Same-day availability</strong>
+              <span>Fast quotes • Local crew • Easy booking</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="container quick-grid">
+        <article class="quick-card liquid-glass">
+          <span>01</span>
+          <h3>Choose</h3>
+          <p>Select items or send a photo.</p>
+        </article>
+        <article class="quick-card liquid-glass">
+          <span>02</span>
+          <h3>Estimate</h3>
+          <p>See a fast ballpark price.</p>
+        </article>
+        <article class="quick-card liquid-glass">
+          <span>03</span>
+          <h3>Haul</h3>
+          <p>We remove it quickly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="services-view" data-view="services">
+      <div class="container page-shell liquid-glass">
+        <div class="page-heading">
+          <p class="eyebrow">What we haul</p>
+          <h2>Junk removal services built for real cleanup jobs.</h2>
+          <p>Choose a service below, then get an estimate when you are ready.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">Household Junk Removal</article>
+          <article class="service-card">Yard Waste Removal</article>
+          <article class="service-card">Construction Debris Removal</article>
+          <article class="service-card">Commercial Junk Removal</article>
+          <article class="service-card">Curbside Junk Removal</article>
+          <article class="service-card">Full Property Cleanout</article>
+          <article class="service-card">Garage Cleanouts</article>
+          <article class="service-card">Estate Cleanouts</article>
+          <article class="service-card">Office Cleanouts</article>
+          <article class="service-card">Appliance Removal</article>
+          <article class="service-card">Furniture Removal</article>
+        </div>
+        <button class="btn btn-primary page-cta glass-button" type="button" data-open-estimate>Get My Estimate</button>
+      </div>
+    </section>
+
+    <section class="view" id="location-view" data-view="location">
+      <div class="container page-shell liquid-glass split-page">
+        <div>
+          <p class="eyebrow">Service area</p>
+          <h2>Serving Tampa Bay and nearby communities.</h2>
+          <p>
+            Tampa, Brandon, Riverview, St. Petersburg, Clearwater, Town 'n' Country, Temple Terrace, and nearby areas.
+          </p>
+          <button class="btn btn-primary glass-button" type="button" data-open-estimate>Check Availability</button>
+        </div>
+        <div class="location-card">
+          <span>📍</span>
+          <strong>Tampa Bay, Florida</strong>
+          <small>Local pickup, cleanouts, curbside jobs, and trailer-load hauling.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="company-view" data-view="company">
+      <div class="container page-shell liquid-glass">
+        <div class="page-heading">
+          <p class="eyebrow">Company</p>
+          <h2>Professional junk removal with a local business feel.</h2>
+          <p>Bay Junk Services focuses on clear pricing, fast communication, and respectful service.</p>
+        </div>
+        <div class="benefits-grid">
+          <article>Fast service</article>
+          <article>Local Tampa Bay business</article>
+          <article>Transparent pricing</article>
+          <article>Easy booking</article>
+          <article>Professional crew</article>
+          <article>Reliable and on time</article>
+        </div>
+        <div class="social-row">
+          <a href="https://instagram.com/bayjunkservices" target="_blank" rel="noopener" class="glass-chip">Instagram</a>
+          <a href="https://facebook.com/bayjunkservices" target="_blank" rel="noopener" class="glass-chip">Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="contact-view" data-view="contact">
+      <div class="container page-shell liquid-glass contact-box">
+        <p class="eyebrow">Contact</p>
+        <h2>Ready to clear the space?</h2>
+        <p><strong>Phone:</strong> (813) 625-5172</p>
+        <p><strong>Email:</strong> hello@bayjunkservices.com</p>
+        <p><strong>Service Area:</strong> Tampa Bay, Florida</p>
+        <div class="hero-actions center-actions">
+          <a class="btn btn-primary glass-button" href="tel:+18136255172">Call Now</a>
+          <a class="btn btn-secondary dark-text glass-button" href="sms:+18136255172?body=Hi%20I%20need%20a%20junk%20removal%20quote.%20I%20will%20send%20photos.">Text/SMS</a>
+          <a class="btn btn-secondary dark-text glass-button" href="https://wa.me/18136255172?text=Hi%20I%20need%20a%20junk%20removal%20quote.%20I%20will%20send%20photos." target="_blank" rel="noopener">WhatsApp</a>
+          <button class="btn btn-primary glass-button" type="button" data-open-estimate>Get Estimate</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="estimate-modal" id="estimateModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+
+    <div class="modal-panel liquid-glass" role="dialog" aria-modal="true" aria-labelledby="estimateTitle">
+      <button class="modal-close glass-button" type="button" data-close-modal aria-label="Close estimate">×</button>
+
+      <div class="modal-intro" id="estimateChoice">
+        <p class="eyebrow">Start your estimate</p>
+        <h2 id="estimateTitle">How would you like to get a quote?</h2>
+        <p>Choose the fastest option for your job. You can select items yourself or send your job details.</p>
+
+        <div class="choice-grid">
+          <button class="choice-card liquid-glass" type="button" data-show-estimate-tab="items">
+            <span>🧾</span>
+            <strong>Select Items</strong>
+            <small>Choose what we pick up and see a live estimate.</small>
+          </button>
+          <button class="choice-card liquid-glass" type="button" data-show-estimate-tab="photo">
+            <span>📲</span>
+            <strong>Send Details</strong>
+            <small>Send your contact info by email, then text photos for a faster quote.</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="estimate-workspace" id="estimateWorkspace" hidden>
+        <div class="modal-toolbar">
+          <button class="back-choice" type="button" data-back-choice>← Back</button>
+          <div class="tabs" role="tablist" aria-label="Estimator options">
+            <button class="tab-btn active" type="button" data-tab="items-panel" role="tab" aria-selected="true">Select Items</button>
+            <button class="tab-btn" type="button" data-tab="photo-panel" role="tab" aria-selected="false">Send Details</button>
+          </div>
+        </div>
+
+        <div class="tab-panel active" id="items-panel" role="tabpanel">
+          <div class="estimator-layout">
+            <div class="item-categories" id="item-categories"></div>
+
+            <aside class="estimate-summary liquid-glass">
+              <h3>Your Estimate</h3>
+              <label for="floor-select">Floor / Access</label>
+              <select id="floor-select">
+                <option value="1">Ground floor</option>
+                <option value="1.08">2nd floor (+8%)</option>
+                <option value="1.15">3rd floor+ (+15%)</option>
+                <option value="1.04">Elevator access (+4%)</option>
+              </select>
+
+              <div id="summary-items" class="summary-items"></div>
+
+              <div class="total-box">
+                <span>Estimated total</span>
+                <strong id="estimate-total">$0</strong>
+              </div>
+
+              <div class="estimate-send-box">
+                <p class="send-title">Send this estimate</p>
+                <div class="send-options">
+                  <button id="estimateSmsBtn" class="btn btn-secondary dark-text glass-button send-option-btn" type="button" aria-label="Send estimate by SMS">
+                    <span class="send-icon sms-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M5 5.5C5 3.57 6.57 2 8.5 2h7C17.43 2 19 3.57 19 5.5v8c0 1.93-1.57 3.5-3.5 3.5H10l-4.2 3.15c-.33.25-.8.01-.8-.4V17.2A3.5 3.5 0 0 1 2 13.75V5.5Z"/>
+                      </svg>
+                    </span>
+                    SMS
+                  </button>
+                  <button id="estimateWhatsAppBtn" class="btn btn-primary glass-button send-option-btn" type="button" aria-label="Send estimate by WhatsApp">
+                    <span class="send-icon whatsapp-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12.04 2C6.58 2 2.13 6.42 2.13 11.86c0 1.74.46 3.43 1.34 4.93L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.91-4.42 9.91-9.86C21.96 6.42 17.51 2 12.04 2Zm5.78 14.1c-.24.67-1.2 1.25-1.92 1.4-.51.11-1.18.2-3.43-.74-2.88-1.19-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.29.57-.36.76-.36h.55c.17 0 .41-.06.64.49.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.31.38-.43.51-.14.14-.29.3-.12.59.17.29.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.45.29.14.46.12.62-.07.19-.22.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.67.79 1.96.93.29.14.48.22.55.34.07.12.07.7-.17 1.37Z"/>
+                      </svg>
+                    </span>
+                    WhatsApp
+                  </button>
+                </div>
+              </div>
+              <p class="fine-print">Final price may vary by volume, weight, access, distance, and disposal fees.</p>
+            </aside>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="photo-panel" role="tabpanel">
+          <form class="photo-form liquid-glass" id="photoForm" action="https://formspree.io/f/xnjlkglp" method="POST">
+            <div class="text-photo-box" id="textPhotoBox">
+              <div class="upload-icon" aria-hidden="true">📲</div>
+              <p>Send photos for a faster quote</p>
+              <span>Choose how you want to send your pictures. No upload needed and no extra cost.</span>
+              <div class="photo-choice-buttons">
+                <a class="btn btn-secondary dark-text glass-button photo-choice-btn" href="sms:+18136255172?body=Hi%20I%20need%20a%20junk%20removal%20quote.%20I%20will%20send%20photos.">
+                  <span class="send-icon sms-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M5 5.5C5 3.57 6.57 2 8.5 2h7C17.43 2 19 3.57 19 5.5v8c0 1.93-1.57 3.5-3.5 3.5H10l-4.2 3.15c-.33.25-.8.01-.8-.4V17.2A3.5 3.5 0 0 1 2 13.75V5.5Z"/>
+                    </svg>
+                  </span>
+                  Text/SMS
+                </a>
+                <a class="btn btn-primary glass-button photo-choice-btn" href="https://wa.me/18136255172?text=Hi%20I%20need%20a%20junk%20removal%20quote.%20I%20will%20send%20photos." target="_blank" rel="noopener">
+                  <span class="send-icon whatsapp-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M12.04 2C6.58 2 2.13 6.42 2.13 11.86c0 1.74.46 3.43 1.34 4.93L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.91-4.42 9.91-9.86C21.96 6.42 17.51 2 12.04 2Zm5.78 14.1c-.24.67-1.2 1.25-1.92 1.4-.51.11-1.18.2-3.43-.74-2.88-1.19-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.29.57-.36.76-.36h.55c.17 0 .41-.06.64.49.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.31.38-.43.51-.14.14-.29.3-.12.59.17.29.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.45.29.14.46.12.62-.07.19-.22.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.67.79 1.96.93.29.14.48.22.55.34.07.12.07.7-.17 1.37Z"/>
+                    </svg>
+                  </span>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+            <div class="form-grid">
+              <label>Name <input type="text" name="name" placeholder="Full name" required /></label>
+              <label>Phone <input type="tel" name="phone" placeholder="(813) 555-0123" required /></label>
+              <label>Email <input type="email" name="email" placeholder="Email address" /></label>
+              <label>Address <input type="text" name="address" placeholder="Tampa Bay address" required /></label>
+              <label>Preferred date <input type="date" name="preferred_date" required /></label>
+              <label class="full-width">Notes <textarea name="message" rows="4" placeholder="Describe what needs to be removed. For a faster quote, send photos by Text/SMS or WhatsApp."></textarea></label>
+            </div>
+            <input type="hidden" name="_subject" value="New Bay Junk Services Estimate Request" />
+            <button class="btn btn-primary glass-button" id="photoSubmitBtn" type="submit">Send My Details</button>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer premium-footer">
+    <div class="footer-glow" aria-hidden="true"></div>
+    <div class="container footer-top">
+      <div class="footer-brand-card">
+        <img src="logo.png" alt="Bay Junk Services logo" class="footer-logo" />
+        <div>
+          <h3>Bay Junk Services</h3>
+          <p>Fast, professional junk removal for homes, businesses, cleanouts, furniture, debris, and more across Tampa Bay.</p>
+          <div class="footer-badges">
+            <span>Same-day availability</span>
+            <span>Free estimates</span>
+            <span>Local crew</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-cta-card">
+        <span class="footer-mini-title">Need a fast quote?</span>
+        <strong>Send photos or choose items in seconds.</strong>
+        <div class="footer-actions">
+          <a class="btn btn-primary glass-button" href="tel:+18136255172">Call Now</a>
+          <a class="btn btn-secondary glass-button" href="sms:+18136255172?body=Hi%20I%20need%20a%20junk%20removal%20quote.%20I%20will%20send%20photos.">Text Photos</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-grid premium-footer-grid">
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <button type="button" data-view-link="home">Home</button>
+        <button type="button" data-view-link="services">Services</button>
+        <button type="button" data-view-link="location">Service Area</button>
+        <button type="button" data-view-link="contact">Contact</button>
+      </div>
+      <div class="footer-column">
+        <h4>Popular Services</h4>
+        <span>Furniture Removal</span>
+        <span>Appliance Removal</span>
+        <span>Garage Cleanouts</span>
+        <span>Construction Debris</span>
+      </div>
+      <div class="footer-column">
+        <h4>Service Area</h4>
+        <span>Tampa</span>
+        <span>Brandon</span>
+        <span>Riverview</span>
+        <span>St. Petersburg • Clearwater</span>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <a href="tel:+18136255172">(813) 625-5172</a>
+        <a href="sms:+18136255172?body=Hi%20I%20need%20a%20junk%20removal%20quote.">Text/SMS</a>
+        <a href="https://wa.me/18136255172?text=Hi%20I%20need%20a%20junk%20removal%20quote." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/bayjunkservices" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com/bayjunkservices" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Bay Junk Services. All rights reserved.</p>
+      <p>Cleanouts • Hauling • Removal</p>
+    </div>
+  </footer>
+</body>
+</html>
