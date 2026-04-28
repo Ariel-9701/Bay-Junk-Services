@@ -40,7 +40,6 @@
             </div>
           </div>
           <a href="#contact">Contact</a>
-          <button class="btn btn-primary btn-glass open-estimate" type="button">Get Estimate</button>
         </nav>
       </div>
     </header>
@@ -50,76 +49,62 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
           <p class="eyebrow">Premium junk hauling in Tampa Bay</p>
-          <h1>Junk Removal That Feels Effortless.</h1>
-          <p>Book quickly, get transparent pricing, and let our professional crew do the heavy lifting.</p>
+          <h1>Clear your space with fast, professional junk removal.</h1>
+          <p>
+            Bay Junk Services makes cleanup simple with transparent pricing, quick estimates, and a trusted local crew.
+          </p>
           <div class="hero-actions">
-            <button class="btn btn-primary btn-glass open-estimate" type="button">Get Estimate</button>
-            <button class="btn btn-secondary btn-glass open-estimate" type="button" data-target-tab="photo-panel">Send a Photo</button>
+            <a class="btn btn-primary" href="#estimator">Get Estimate</a>
+            <a class="btn btn-secondary" href="#photo-tab">Send a Photo</a>
           </div>
         </div>
       </section>
 
-      <section class="section quick-proof" id="company">
-        <div class="container proof-grid">
-          <article class="glass-card"><h3>Fast Service</h3><p>Same-day and next-day availability in many Tampa Bay areas.</p></article>
-          <article class="glass-card"><h3>Transparent Pricing</h3><p>See an estimate instantly with floor and access adjustments.</p></article>
-          <article class="glass-card"><h3>Professional Crew</h3><p>On-time, respectful service for homes and businesses.</p></article>
+      <section class="section" id="how-it-works">
+        <div class="container">
+          <h2>How It Works</h2>
+          <div class="steps-grid">
+            <article class="glass-card">
+              <div class="step-icon">📦</div>
+              <h3>Select items or upload a photo</h3>
+              <p>Use our estimator to list items or send pictures for a fast review.</p>
+            </article>
+            <article class="glass-card">
+              <div class="step-icon">💬</div>
+              <h3>Get an estimate</h3>
+              <p>Receive transparent pricing based on volume, access, and floor level.</p>
+            </article>
+            <article class="glass-card">
+              <div class="step-icon">🚚</div>
+              <h3>We remove your junk</h3>
+              <p>Our professional crew shows up on time and hauls everything away.</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="section section-alt" id="services">
         <div class="container">
-          <h2>Popular Services</h2>
+          <h2>Services</h2>
           <div class="services-grid">
             <article class="service-card">Household Junk Removal</article>
             <article class="service-card">Yard Waste Removal</article>
             <article class="service-card">Construction Debris Removal</article>
             <article class="service-card">Commercial Junk Removal</article>
-            <article class="service-card">Garage, Estate & Office Cleanouts</article>
-            <article class="service-card">Appliance & Furniture Removal</article>
+            <article class="service-card">Curbside Junk Removal</article>
+            <article class="service-card">Full Property Cleanout</article>
+            <article class="service-card">Garage Cleanouts</article>
+            <article class="service-card">Estate Cleanouts</article>
+            <article class="service-card">Office Cleanouts</article>
+            <article class="service-card">Appliance Removal</article>
+            <article class="service-card">Furniture Removal</article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="location">
-        <div class="container compact-section">
-          <h2>Serving Tampa Bay</h2>
-          <p>Tampa, St. Petersburg, Clearwater, Brandon, and surrounding communities.</p>
-        </div>
-      </section>
-
-      <section class="section section-alt" id="contact">
-        <div class="container contact-box glass-card">
-          <h2>Ready to clear your space?</h2>
-          <p><strong>Phone:</strong> (813) 555-0147 · <strong>Email:</strong> hello@bayjunkservices.com</p>
-          <div class="hero-actions center">
-            <a class="btn btn-primary btn-glass" href="tel:+18135550147">Call Now</a>
-            <a class="btn btn-secondary btn-glass" href="sms:+18135550147">Text Us</a>
-            <button class="btn btn-primary btn-glass open-estimate" type="button">Get Estimate</button>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <div class="estimate-modal" id="estimate-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="estimate-modal-title">
-      <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-panel glass-card">
-        <button class="modal-close" type="button" aria-label="Close estimate modal" data-close-modal>✕</button>
-        <h2 id="estimate-modal-title">Get Your Estimate</h2>
-        <p class="modal-subtitle">Choose how you'd like to start.</p>
-
-        <div class="option-cards" id="estimate-options">
-          <button class="option-card" type="button" data-open-flow="items-panel">
-            <strong>Select Items</strong>
-            <span>Choose what you need removed and get an instant estimate.</span>
-          </button>
-          <button class="option-card" type="button" data-open-flow="photo-panel">
-            <strong>Send a Photo</strong>
-            <span>Upload a photo and request a custom quote.</span>
-          </button>
-        </div>
-
-        <div id="estimate-flow" class="estimate-flow hidden">
+      <section class="section" id="estimator">
+        <div class="container">
+          <h2>Booking & Estimator</h2>
           <div class="tabs" role="tablist" aria-label="Estimator tabs">
             <button class="tab-btn active" id="items-tab" data-tab="items-panel" role="tab" aria-selected="true">Select Items</button>
             <button class="tab-btn" id="photo-tab" data-tab="photo-panel" role="tab" aria-selected="false">Upload Photo</button>
@@ -143,7 +128,7 @@
                   <span>Estimated total</span>
                   <strong id="estimate-total">$0</strong>
                 </div>
-                <button class="btn btn-primary btn-glass full" type="button">Book This Estimate</button>
+                <button class="btn btn-primary full">Book This Estimate</button>
               </aside>
             </div>
           </div>
@@ -162,12 +147,83 @@
                 <label>Preferred date <input type="date" required /></label>
                 <label class="full-width">Notes <textarea rows="4" placeholder="Tell us what needs to be removed"></textarea></label>
               </div>
-              <button class="btn btn-primary btn-glass" type="submit">Request Photo Estimate</button>
+              <button class="btn btn-primary" type="submit">Request Photo Estimate</button>
             </form>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section class="section section-alt" id="pricing">
+        <div class="container">
+          <h2>Pricing Tiers</h2>
+          <div class="pricing-grid">
+            <article class="glass-card"><h3>Small Load</h3><p>Perfect for a few items or a quick pickup.</p></article>
+            <article class="glass-card"><h3>Medium Load</h3><p>Ideal for room cleanouts and mixed household junk.</p></article>
+            <article class="glass-card"><h3>Large Load</h3><p>Best for bulky furniture, appliances, and debris.</p></article>
+            <article class="glass-card"><h3>Full Trailer Load</h3><p>Full-service haul for major cleanout projects.</p></article>
+            <article class="glass-card"><h3>Custom Quote</h3><p>Tailored plans for unique jobs or recurring pickups.</p></article>
+          </div>
+          <p class="pricing-note">Pricing depends on volume, weight, floor level, access, and distance.</p>
+        </div>
+      </section>
+
+      <section class="section" id="company">
+        <div class="container">
+          <h2>Why Choose Us</h2>
+          <ul class="benefits">
+            <li>Fast service</li>
+            <li>Local Tampa Bay business</li>
+            <li>Transparent pricing</li>
+            <li>Easy booking</li>
+            <li>Professional crew</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <h2>FAQ</h2>
+          <div class="faq-list">
+            <details>
+              <summary>How quickly can you pick up?</summary>
+              <p>In many cases we can provide same-day or next-day service across Tampa Bay.</p>
+            </details>
+            <details>
+              <summary>Do I need to move items outside?</summary>
+              <p>No. Our team can remove items from inside your home, office, or property.</p>
+            </details>
+            <details>
+              <summary>What payment methods do you accept?</summary>
+              <p>We accept major cards, digital payments, and cash at the time of service.</p>
+            </details>
+            <details>
+              <summary>Can I send photos for a quote?</summary>
+              <p>Yes. Use the Upload Photo tab and we will follow up quickly with a price range.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="location">
+        <div class="container">
+          <h2>Location & Service Area</h2>
+          <p>Serving Tampa, St. Petersburg, Clearwater, Brandon, and surrounding Tampa Bay communities.</p>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-box glass-card">
+          <h2>Contact Bay Junk Services</h2>
+          <p><strong>Phone:</strong> (813) 555-0147</p>
+          <p><strong>Email:</strong> hello@bayjunkservices.com</p>
+          <p><strong>Service Area:</strong> Tampa Bay, Florida</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:+18135550147">Call Now</a>
+            <a class="btn btn-secondary" href="sms:+18135550147">Text Us</a>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="site-footer">
       <div class="container footer-grid">
@@ -178,7 +234,7 @@
         <div>
           <h4>Links</h4>
           <a href="#services">Services</a>
-          <a href="#location">Location</a>
+          <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </div>
         <div>

@@ -37,45 +37,8 @@ const summaryRoot = document.getElementById("summary-items");
 const totalRoot = document.getElementById("estimate-total");
 const floorSelect = document.getElementById("floor-select");
 
-const modal = document.getElementById("estimate-modal");
-const flow = document.getElementById("estimate-flow");
-const options = document.getElementById("estimate-options");
-
 function money(value) {
   return `$${Math.round(value).toLocaleString()}`;
-}
-
-function openModal() {
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function closeModal() {
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-function selectTab(tabId) {
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabPanels = document.querySelectorAll(".tab-panel");
-
-  tabButtons.forEach((btn) => {
-    const isActive = btn.dataset.tab === tabId;
-    btn.classList.toggle("active", isActive);
-    btn.setAttribute("aria-selected", String(isActive));
-  });
-
-  tabPanels.forEach((panel) => {
-    panel.classList.toggle("active", panel.id === tabId);
-  });
-}
-
-function showFlow(tabId) {
-  flow.classList.remove("hidden");
-  options.style.display = "none";
-  selectTab(tabId);
 }
 
 function renderCategories() {
@@ -153,35 +116,21 @@ function updateSummary() {
 
 floorSelect.addEventListener("change", updateSummary);
 
-document.querySelectorAll(".tab-btn").forEach((button) => {
-  button.addEventListener("click", () => selectTab(button.dataset.tab));
-});
+const tabButtons = document.querySelectorAll(".tab-btn");
+const tabPanels = document.querySelectorAll(".tab-panel");
 
-document.querySelectorAll(".open-estimate").forEach((button) => {
+tabButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    openModal();
-    const targetTab = button.dataset.targetTab;
-    if (targetTab) {
-      showFlow(targetTab);
-      return;
-    }
-    options.style.display = "grid";
-    flow.classList.add("hidden");
+    tabButtons.forEach((btn) => {
+      btn.classList.remove("active");
+      btn.setAttribute("aria-selected", "false");
+    });
+    tabPanels.forEach((panel) => panel.classList.remove("active"));
+
+    button.classList.add("active");
+    button.setAttribute("aria-selected", "true");
+    document.getElementById(button.dataset.tab).classList.add("active");
   });
-});
-
-document.querySelectorAll("[data-open-flow]").forEach((button) => {
-  button.addEventListener("click", () => showFlow(button.dataset.openFlow));
-});
-
-document.querySelectorAll("[data-close-modal]").forEach((button) => {
-  button.addEventListener("click", closeModal);
-});
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && modal.classList.contains("open")) {
-    closeModal();
-  }
 });
 
 const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
