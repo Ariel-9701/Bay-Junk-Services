@@ -402,7 +402,9 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
   const customerAddress = String(formData.get("customer_address") || "").trim();
   const preferredDate = String(formData.get("preferred_date") || "").trim() || "Not selected";
   const notes = String(formData.get("notes") || "").trim() || "No notes provided.";
-
+  
+  const quoteId = "BJ-" + Math.floor(100000 + Math.random() * 900000);
+  
   const templateParams = {
     customer_name: customerName,
     customer_email: customerEmail,
@@ -414,7 +416,8 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
     subtotal: money(subtotal),
     discount: discount ? `-${money(discount)}` : "$0",
     total: money(total).replace("$", ""),
-    notes
+    notes,
+    quote_id: quoteId
   };
 
   try {
@@ -442,3 +445,4 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
     }
   }
 });
+
