@@ -615,3 +615,58 @@ select, input, textarea { width: 100%; border: 1px solid rgba(17, 136, 204, 0.22
 /* Modal must stay above the mobile header/menu */
 body.modal-open .site-header { display: none; }
 
+
+/* =========================
+   EMAIL ESTIMATE UPDATE
+========================= */
+
+.item-hint {
+  color: var(--muted);
+}
+
+.total-box {
+  display: none;
+}
+
+.estimate-email-form {
+  margin: 1rem 0 0;
+  padding: 0.95rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(17, 136, 204, 0.14);
+}
+
+.estimate-email-intro {
+  margin: -0.25rem 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.mini-form-grid {
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+}
+
+.mini-form-grid label {
+  font-size: 0.88rem;
+}
+
+.mini-form-grid input,
+.mini-form-grid textarea {
+  padding: 0.72rem 0.8rem;
+  border-radius: 14px;
+}
+
+.form-status.info {
+  color: var(--navy-700);
+}
+
+.form-status.success {
+  color: var(--green-500);
+}
+
+.form-status.error {
+  color: #b42318;
+}
