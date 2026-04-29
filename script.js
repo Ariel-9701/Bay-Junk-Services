@@ -1,4 +1,16 @@
 // =======================
+// EMAILJS CONFIG
+// =======================
+const EMAILJS_PUBLIC_KEY = "PtXTxlI5wOohMZTz5";
+const EMAILJS_SERVICE_ID = "service_r9xbav2";
+const EMAILJS_CLIENT_TEMPLATE_ID = "template_cv3ngtc";
+const EMAILJS_OWNER_TEMPLATE_ID = "template_jc3rf4i";
+
+if (window.emailjs) {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
+
+// =======================
 // DATA
 // =======================
 const itemData = {
@@ -111,7 +123,7 @@ function renderCategories() {
       row.innerHTML = `
         <div>
           <strong>${name}</strong><br />
-          <small>${money(price)} each</small>
+          <small class="item-hint">Estimate sent by email</small>
         </div>
         <div class="item-controls" aria-label="${name} quantity controls">
           <button class="qty-btn" type="button" data-key="${key}" data-delta="-1" aria-label="Decrease ${name}">−</button>
@@ -160,13 +172,14 @@ function updateSummary() {
 
       const line = document.createElement("div");
       line.className = "summary-line";
-      line.innerHTML = `<span>${item.name} × ${item.qty}</span><strong>${money(lineTotal)}</strong>`;
+      line.innerHTML = `<span>${item.name} × ${item.qty}</span><strong>Selected</strong>`;
       summaryRoot.appendChild(line);
     });
   }
 
   const multiplier = Number(floorSelect?.value || 1);
-  totalRoot.textContent = money(subtotal * multiplier);
+  totalRoot.textContent = selectedItems.length ? "Ready" : "$0";
+  totalRoot.dataset.estimateValue = String(Math.round(subtotal * multiplier));
 }
 
 floorSelect?.addEventListener("change", updateSummary);
@@ -324,49 +337,108 @@ const year = $("#year");
 if (year) year.textContent = new Date().getFullYear();
 
 
+
 // =======================
-// SEND ESTIMATE: SMS OR WHATSAPP
+// SEND ESTIMATE BY EMAILJS
 // =======================
-const estimateSmsBtn = document.getElementById("estimateSmsBtn");
-const estimateWhatsAppBtn = document.getElementById("estimateWhatsAppBtn");
-const businessPhoneNumber = "18136255172";
+const estimateEmailForm = document.getElementById("estimateEmailForm");
+const estimateEmailBtn = document.getElementById("estimateEmailBtn");
+const estimateEmailStatus = document.getElementById("estimateEmailStatus");
 
 function selectedEstimateItems() {
   return Object.values(selections).filter((item) => item.qty > 0);
 }
 
-function buildEstimateMessage() {
+function calculateEstimate() {
   const selectedItems = selectedEstimateItems();
+  const subtotal = selectedItems.reduce((sum, item) => sum + item.qty * item.price, 0);
+  const multiplier = Number(floorSelect?.value || 1);
+  const adjustedTotal = Math.round(subtotal * multiplier);
+  const discount = adjustedTotal >= 150 ? Math.min(25, Math.round(adjustedTotal * 0.1)) : 0;
+  const total = Math.max(0, adjustedTotal - discount);
+  const access = floorSelect?.options[floorSelect.selectedIndex]?.text || "Ground floor";
 
-  if (!selectedItems.length) {
-    alert("Please select at least one item before sending your estimate.");
-    return null;
-  }
-
-  let message = "Hi, I need a junk removal estimate:\n\n";
-
-  selectedItems.forEach((item) => {
-    message += `- ${item.name} x${item.qty} (${money(item.qty * item.price)})\n`;
-  });
-
-  const floorText = floorSelect?.options[floorSelect.selectedIndex]?.text || "Ground floor";
-  const total = totalRoot?.textContent || "$0";
-
-  message += `\nAccess: ${floorText}`;
-  message += `\nEstimated total: ${total}`;
-  message += "\n\nI would like to schedule this pickup.";
-
-  return encodeURIComponent(message);
+  return { selectedItems, subtotal, adjustedTotal, discount, total, access };
 }
 
-estimateSmsBtn?.addEventListener("click", () => {
-  const message = buildEstimateMessage();
-  if (!message) return;
-  window.location.href = `sms:+${businessPhoneNumber}?body=${message}`;
-});
+function buildEstimateRows(items) {
+  return items.map((item) => {
+    const lineTotal = item.qty * item.price;
+    return `
+      <tr>
+        <td style="padding:8px; border-bottom:1px solid #e5e7eb;">${item.name}</td>
+        <td style="padding:8px; border-bottom:1px solid #e5e7eb; text-align:center;">${item.qty}</td>
+        <td style="padding:8px; border-bottom:1px solid #e5e7eb; text-align:right;">${money(lineTotal)}</td>
+      </tr>
+    `;
+  }).join("");
+}
 
-estimateWhatsAppBtn?.addEventListener("click", () => {
-  const message = buildEstimateMessage();
-  if (!message) return;
-  window.open(`https://wa.me/${businessPhoneNumber}?text=${message}`, "_blank");
+function setEstimateEmailStatus(message, type = "info") {
+  if (!estimateEmailStatus) return;
+  estimateEmailStatus.textContent = message;
+  estimateEmailStatus.className = `form-status ${type}`;
+}
+
+estimateEmailForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!window.emailjs) {
+    setEstimateEmailStatus("Email service is not loaded. Please check your internet connection and try again.", "error");
+    return;
+  }
+
+  const { selectedItems, subtotal, discount, total, access } = calculateEstimate();
+
+  if (!selectedItems.length) {
+    setEstimateEmailStatus("Please select at least one item first.", "error");
+    return;
+  }
+
+  const formData = new FormData(estimateEmailForm);
+  const customerName = String(formData.get("customer_name") || "").trim();
+  const customerEmail = String(formData.get("customer_email") || "").trim();
+  const customerPhone = String(formData.get("customer_phone") || "").trim();
+  const customerAddress = String(formData.get("customer_address") || "").trim();
+  const preferredDate = String(formData.get("preferred_date") || "").trim() || "Not selected";
+  const notes = String(formData.get("notes") || "").trim() || "No notes provided.";
+
+  const templateParams = {
+    customer_name: customerName,
+    customer_email: customerEmail,
+    customer_phone: customerPhone,
+    customer_address: customerAddress,
+    preferred_date: preferredDate,
+    access,
+    estimate_table: buildEstimateRows(selectedItems),
+    subtotal: money(subtotal),
+    discount: discount ? `-${money(discount)}` : "$0",
+    total: money(total).replace("$", ""),
+    notes
+  };
+
+  try {
+    if (estimateEmailBtn) {
+      estimateEmailBtn.disabled = true;
+      estimateEmailBtn.textContent = "Sending...";
+    }
+
+    setEstimateEmailStatus("Sending estimate...", "info");
+
+    await Promise.all([
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CLIENT_TEMPLATE_ID, templateParams),
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OWNER_TEMPLATE_ID, templateParams)
+    ]);
+
+    estimateEmailForm.reset();
+    setEstimateEmailStatus("Success! Your estimate was sent by email.", "success");
+  } catch (error) {
+    console.error("EmailJS error:", error);
+    setEstimateEmailStatus("Something went wrong sending the estimate. Please try again or text us.", "error");
+  } finally {
+    if (estimateEmailBtn) {
+      estimateEmailBtn.disabled = false;
+      estimateEmailBtn.textContent = "Send Estimate by Email";
+    }
+  }
 });
