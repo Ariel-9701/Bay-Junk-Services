@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script defer src="script.js"></script>
 </head>
 
@@ -49,7 +50,7 @@
             <p class="hero-subtitle">
               Fast local junk removal for homes, businesses, cleanouts, debris, furniture, and more.
             </p>
-            <p class="trust-line">✔ Licensed & Insured • ✔ Same-Day Service • ✔ Upfront Pricing</p>
+            <p class="trust-line">✔ Licensed & Insured • ✔ Same-Day Service • ✔ Email Estimates</p>
             <div class="hero-actions">
               <button class="btn btn-primary btn-large glass-button" type="button" data-open-estimate data-start-tab="items">Get Estimate</button>
               <button class="btn btn-secondary btn-large glass-button" type="button" data-open-estimate data-start-tab="photo">Send Details</button>
@@ -75,7 +76,7 @@
         <article class="quick-card liquid-glass">
           <span>02</span>
           <h3>Estimate</h3>
-          <p>See a fast ballpark price.</p>
+          <p>Receive your estimate by email.</p>
         </article>
         <article class="quick-card liquid-glass">
           <span>03</span>
@@ -154,7 +155,7 @@
         <p class="eyebrow">Contact</p>
         <h2>Ready to clear the space?</h2>
         <p><strong>Phone:</strong> (813) 625-5172</p>
-        <p><strong>Email:</strong> hello@bayjunkservices.com</p>
+        <p><strong>Email:</strong> quotes@bayjunkservices.com</p>
         <p><strong>Service Area:</strong> Tampa Bay, Florida</p>
         <div class="hero-actions center-actions">
           <a class="btn btn-primary glass-button" href="tel:+18136255172">Call Now</a>
@@ -181,7 +182,7 @@
           <button class="choice-card liquid-glass" type="button" data-show-estimate-tab="items">
             <span>🧾</span>
             <strong>Select Items</strong>
-            <small>Choose what we pick up and see a live estimate.</small>
+            <small>Choose what we pick up and receive an emailed estimate.</small>
           </button>
           <button class="choice-card liquid-glass" type="button" data-show-estimate-tab="photo">
             <span>📲</span>
@@ -221,28 +222,23 @@
                 <strong id="estimate-total">$0</strong>
               </div>
 
-              <div class="estimate-send-box">
-                <p class="send-title">Send this estimate</p>
-                <div class="send-options">
-                  <button id="estimateSmsBtn" class="btn btn-secondary dark-text glass-button send-option-btn" type="button" aria-label="Send estimate by SMS">
-                    <span class="send-icon sms-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" focusable="false">
-                        <path d="M5 5.5C5 3.57 6.57 2 8.5 2h7C17.43 2 19 3.57 19 5.5v8c0 1.93-1.57 3.5-3.5 3.5H10l-4.2 3.15c-.33.25-.8.01-.8-.4V17.2A3.5 3.5 0 0 1 2 13.75V5.5Z"/>
-                      </svg>
-                    </span>
-                    SMS
-                  </button>
-                  <button id="estimateWhatsAppBtn" class="btn btn-primary glass-button send-option-btn" type="button" aria-label="Send estimate by WhatsApp">
-                    <span class="send-icon whatsapp-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" focusable="false">
-                        <path d="M12.04 2C6.58 2 2.13 6.42 2.13 11.86c0 1.74.46 3.43 1.34 4.93L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.91-4.42 9.91-9.86C21.96 6.42 17.51 2 12.04 2Zm5.78 14.1c-.24.67-1.2 1.25-1.92 1.4-.51.11-1.18.2-3.43-.74-2.88-1.19-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.29.57-.36.76-.36h.55c.17 0 .41-.06.64.49.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.31.38-.43.51-.14.14-.29.3-.12.59.17.29.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.45.29.14.46.12.62-.07.19-.22.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.67.79 1.96.93.29.14.48.22.55.34.07.12.07.7-.17 1.37Z"/>
-                      </svg>
-                    </span>
-                    WhatsApp
-                  </button>
+              <form class="estimate-email-form" id="estimateEmailForm">
+                <p class="send-title">Email my estimate</p>
+                <p class="estimate-email-intro">Select your items and we’ll send an organized estimate to your email. Prices stay private until you submit.</p>
+
+                <div class="mini-form-grid">
+                  <label>Name <input type="text" id="estimateName" name="customer_name" placeholder="Full name" required /></label>
+                  <label>Phone <input type="tel" id="estimatePhone" name="customer_phone" placeholder="(813) 555-0123" required /></label>
+                  <label>Email <input type="email" id="estimateEmail" name="customer_email" placeholder="Email address" required /></label>
+                  <label>Address <input type="text" id="estimateAddress" name="customer_address" placeholder="Pickup address" required /></label>
+                  <label>Preferred date <input type="date" id="estimateDate" name="preferred_date" /></label>
+                  <label>Notes <textarea id="estimateNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea></label>
                 </div>
-              </div>
-              <p class="fine-print">Final price may vary by volume, weight, access, distance, and disposal fees.</p>
+
+                <button id="estimateEmailBtn" class="btn btn-primary glass-button full" type="submit">Send Estimate by Email</button>
+                <p class="form-status" id="estimateEmailStatus" aria-live="polite"></p>
+              </form>
+              <p class="fine-print">Final pricing may vary by volume, weight, access, distance, and disposal fees.</p>
             </aside>
           </div>
         </div>
