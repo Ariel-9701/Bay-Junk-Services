@@ -15,34 +15,56 @@ if (window.emailjs) {
 // =======================
 const itemData = {
   Furniture: [
-    ["Mattress", 85],
-    ["Sofa", 115],
-    ["Sectional Couch", 185],
-    ["Dresser", 90],
-    ["Bed Frame", 70],
-    ["Chairs", 25],
-    ["Table", 65]
+    ["Mattress", 15],
+    ["Box Spring", 6],
+    ["Sofa", 18],
+    ["Loveseat", 12],
+    ["Sectional Couch", 30],
+    ["Recliner", 10],
+    ["Dresser", 15],
+    ["Bed Frame", 12],
+    ["Headboard", 6],
+    ["Chairs", 4],
+    ["Dining Table", 14],
+    ["Coffee Table", 7],
+    ["TV Stand", 10],
+    ["Nightstand", 5],
+    ["Bookshelf", 10],
+    ["Desk", 12]
   ],
   Appliances: [
-    ["Refrigerator", 110],
-    ["Washer", 95],
-    ["Dryer", 95],
-    ["Stove", 95],
-    ["TV", 45]
+    ["Refrigerator", 25],
+    ["Washer", 18],
+    ["Dryer", 18],
+    ["Stove", 18],
+    ["Dishwasher", 12],
+    ["Microwave", 5],
+    ["TV", 6]
   ],
   General: [
-    ["Boxes", 12],
-    ["Trash Bags", 10],
-    ["Misc Items", 20]
+    ["Boxes", 3],
+    ["Trash Bags", 3],
+    ["Misc Items", 5],
+    ["Small Rug", 4],
+    ["Large Rug", 8],
+    ["Toys / Small Household Items", 3]
   ],
   Debris: [
-    ["Yard Waste", 35],
-    ["Construction Debris", 60],
-    ["Tires", 25]
+    ["Yard Waste", 10],
+    ["Construction Debris", 15],
+    ["Wood / Lumber", 15],
+    ["Drywall", 18],
+    ["Tile / Concrete", 25],
+    ["Tires", 6]
   ],
   "Large Items": [
-    ["Hot Tub", 350],
-    ["Shed Removal", 420]
+    ["Hot Tub", 60],
+    ["Shed Removal", 70],
+    ["Piano", 50],
+    ["Pool Table", 50],
+    ["Exercise Equipment", 25],
+    ["Patio Set", 22],
+    ["Grill", 10]
   ]
 };
 
@@ -59,6 +81,83 @@ function money(value) {
 function safeId(value) {
   return value.replace(/[^a-zA-Z0-9_-]/g, "-");
 }
+
+function getTrailerEstimate(volume) {
+  if (volume <= 0) {
+    return {
+      load: "No items selected",
+      range: "$0",
+      label: "$0",
+      low: 0,
+      high: 0
+    };
+  }
+
+  if (volume <= 25) {
+    return {
+      load: "Minimum Load",
+      range: "$90 – $140",
+      label: "Minimum Load ($90 – $140)",
+      low: 90,
+      high: 140
+    };
+  }
+
+  if (volume <= 40) {
+    return {
+      load: "¼ Trailer",
+      range: "$180 – $280",
+      label: "¼ Trailer ($180 – $280)",
+      low: 180,
+      high: 280
+    };
+  }
+
+  if (volume <= 60) {
+    return {
+      load: "½ Trailer",
+      range: "$350 – $450",
+      label: "½ Trailer ($350 – $450)",
+      low: 350,
+      high: 450
+    };
+  }
+
+  if (volume <= 80) {
+    return {
+      load: "¾ Trailer",
+      range: "$500 – $650",
+      label: "¾ Trailer ($500 – $650)",
+      low: 500,
+      high: 650
+    };
+  }
+
+  if (volume <= 100) {
+    return {
+      load: "Full Trailer",
+      range: "$700 – $800",
+      label: "Full Trailer ($700 – $800)",
+      low: 700,
+      high: 800
+    };
+  }
+
+  return {
+    load: "Multiple Loads",
+    range: "Custom Quote",
+    label: "Multiple Loads (Custom Quote)",
+    low: 0,
+    high: 0
+  };
+}
+
+function selectedVolume(items = selectedEstimateItems()) {
+  const baseVolume = items.reduce((sum, item) => sum + item.qty * item.price, 0);
+  const multiplier = Number(floorSelect?.value || 1);
+  return Math.round(baseVolume * multiplier);
+}
+
 
 // =======================
 // VIEW / PAGE LAYERS
@@ -107,10 +206,23 @@ function renderCategories() {
 
   categoriesRoot.innerHTML = "";
 
-  Object.entries(itemData).forEach(([category, items]) => {
+  Object.entries(itemData).forEach(([category, items], index) => {
     const card = document.createElement("article");
     card.className = "category-card";
-    card.innerHTML = `<h3>${category}</h3>`;
+    card.innerHTML = `
+      <button class="category-toggle" type="button" aria-expanded="${index === 0 ? "true" : "false"}">
+        <span>${category}</span>
+        <span class="category-arrow" aria-hidden="true">⌄</span>
+      </button>
+      <div class="category-items" ${index === 0 ? "" : "hidden"}></div>
+    `;
+
+    const itemsWrap = card.querySelector(".category-items");
+    const toggle = card.querySelector(".category-toggle");
+
+    if (index === 0) {
+      card.classList.add("open");
+    }
 
     items.forEach(([name, price]) => {
       const key = `${category}:${name}`;
@@ -123,7 +235,7 @@ function renderCategories() {
       row.innerHTML = `
         <div>
           <strong>${name}</strong><br />
-          <small class="item-hint">Estimate sent by email</small>
+          <small class="item-hint">Estimated trailer space: ${price}%</small>
         </div>
         <div class="item-controls" aria-label="${name} quantity controls">
           <button class="qty-btn" type="button" data-key="${key}" data-delta="-1" aria-label="Decrease ${name}">−</button>
@@ -131,7 +243,14 @@ function renderCategories() {
         </div>
         <div class="qty-display" id="qty-${id}" aria-live="polite">0</div>
       `;
-      card.appendChild(row);
+      itemsWrap.appendChild(row);
+    });
+
+    toggle?.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      itemsWrap.hidden = isOpen;
+      card.classList.toggle("open", !isOpen);
     });
 
     categoriesRoot.appendChild(card);
@@ -159,27 +278,32 @@ function updateSummary() {
   if (!summaryRoot || !totalRoot) return;
 
   summaryRoot.innerHTML = "";
-  let subtotal = 0;
 
   const selectedItems = Object.values(selections).filter((item) => item.qty > 0);
 
   if (!selectedItems.length) {
     summaryRoot.innerHTML = `<p class="summary-empty">No items selected yet.</p>`;
-  } else {
-    selectedItems.forEach((item) => {
-      const lineTotal = item.qty * item.price;
-      subtotal += lineTotal;
-
-      const line = document.createElement("div");
-      line.className = "summary-line";
-      line.innerHTML = `<span>${item.name} × ${item.qty}</span><strong>Selected</strong>`;
-      summaryRoot.appendChild(line);
-    });
+    totalRoot.textContent = "$0";
+    totalRoot.dataset.estimateValue = "0";
+    totalRoot.dataset.loadSize = "No items selected";
+    totalRoot.dataset.priceRange = "$0";
+    return;
   }
 
-  const multiplier = Number(floorSelect?.value || 1);
-  totalRoot.textContent = selectedItems.length ? "Ready" : "$0";
-  totalRoot.dataset.estimateValue = String(Math.round(subtotal * multiplier));
+  selectedItems.forEach((item) => {
+    const line = document.createElement("div");
+    line.className = "summary-line";
+    line.innerHTML = `<span>${item.name} × ${item.qty}</span><strong>${item.price * item.qty}%</strong>`;
+    summaryRoot.appendChild(line);
+  });
+
+  const volume = selectedVolume(selectedItems);
+  const estimate = getTrailerEstimate(volume);
+
+  totalRoot.textContent = estimate.label;
+  totalRoot.dataset.estimateValue = estimate.range;
+  totalRoot.dataset.loadSize = estimate.load;
+  totalRoot.dataset.priceRange = estimate.range;
 }
 
 floorSelect?.addEventListener("change", updateSummary);
@@ -351,24 +475,28 @@ function selectedEstimateItems() {
 
 function calculateEstimate() {
   const selectedItems = selectedEstimateItems();
-  const subtotal = selectedItems.reduce((sum, item) => sum + item.qty * item.price, 0);
-  const multiplier = Number(floorSelect?.value || 1);
-  const adjustedTotal = Math.round(subtotal * multiplier);
-  const discount = adjustedTotal >= 150 ? Math.min(25, Math.round(adjustedTotal * 0.1)) : 0;
-  const total = Math.max(0, adjustedTotal - discount);
+  const volume = selectedVolume(selectedItems);
+  const estimate = getTrailerEstimate(volume);
   const access = floorSelect?.options[floorSelect.selectedIndex]?.text || "Ground floor";
 
-  return { selectedItems, subtotal, adjustedTotal, discount, total, access };
+  return {
+    selectedItems,
+    volume,
+    loadSize: estimate.load,
+    priceRange: estimate.range,
+    totalLabel: estimate.label,
+    access
+  };
 }
 
 function buildEstimateRows(items) {
   return items.map((item) => {
-    const lineTotal = item.qty * item.price;
+    const lineVolume = item.qty * item.price;
     return `
       <tr>
         <td style="padding:8px; border-bottom:1px solid #e5e7eb;">${item.name}</td>
         <td style="padding:8px; border-bottom:1px solid #e5e7eb; text-align:center;">${item.qty}</td>
-        <td style="padding:8px; border-bottom:1px solid #e5e7eb; text-align:right;">${money(lineTotal)}</td>
+        <td style="padding:8px; border-bottom:1px solid #e5e7eb; text-align:right;">${lineVolume}%</td>
       </tr>
     `;
   }).join("");
@@ -388,7 +516,7 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
     return;
   }
 
-  const { selectedItems, subtotal, discount, total, access } = calculateEstimate();
+  const { selectedItems, volume, loadSize, priceRange, totalLabel, access } = calculateEstimate();
 
   if (!selectedItems.length) {
     setEstimateEmailStatus("Please select at least one item first.", "error");
@@ -414,11 +542,14 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
     preferred_date: preferredDate,
     access: access,
     estimate_table: buildEstimateRows(selectedItems),
-    subtotal: money(subtotal),
-    discount: discount ? `-${money(discount)}` : "$0",
-    total: money(total).replace("$", ""),
-    notes: notes,
-    quote_id: quoteId
+    subtotal: `${volume}% estimated trailer space`,
+    discount: "$0",
+    total: totalLabel,
+    notes: `${notes}\n\nEstimated Load: ${loadSize}\nEstimated Price Range: ${priceRange}`,
+    quote_id: quoteId,
+    load_size: loadSize,
+    price_range: priceRange,
+    trailer_volume: `${volume}%`
   };
 
   try {
@@ -446,4 +577,3 @@ estimateEmailForm?.addEventListener("submit", async (event) => {
     }
   }
 });
-
